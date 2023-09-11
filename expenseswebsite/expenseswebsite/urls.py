@@ -1,8 +1,7 @@
-"""
-URL configuration for expenseswebsite project.
+"""expenseswebsite URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
-    https://docs.djangoproject.com/en/4.2/topics/http/urls/
+    https://docs.djangoproject.com/en/4.1/topics/http/urls/
 Examples:
 Function views
     1. Add an import:  from my_app import views
@@ -15,8 +14,17 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.contrib.auth import views as auth_views 
+from django.urls import path,include
 
 urlpatterns = [
+    path('',include('expenses.urls')),
+    path('preferences',include('userpreferences.urls')),
+    path('income/',include('userincome.urls')), 
+    path('authentication/reset_password/',auth_views.PasswordResetView.as_view(template_name="authentication/reset-password.html"),name="reset_password"),
+    path('authentication/reset_password_sent/',auth_views.PasswordResetDoneView.as_view(template_name="authentication/reset-password-sent.html"),name="password_reset_done"),
+    path('authentication/reset/<uidb64>/<token>/',auth_views.PasswordResetConfirmView.as_view(template_name="authentication/set-new-password.html"), name="password_reset_confirm"),
+    path('authentication/reset_password_complete/',auth_views.PasswordResetCompleteView.as_view(template_name="authentication/password_reset_done.html"),name="password_reset_complete"),
+    path('authentication/',include('authentication.urls')),
     path('admin/', admin.site.urls),
 ]

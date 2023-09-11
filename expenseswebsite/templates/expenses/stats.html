@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% load static%}
+{% block content%}
+
+<div class="container mt-4">
+<div class="row mb-2">
+  <div class="col-md-10 ">
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb  border border-1 border-dark  bg-dark p-2">
+        <li class="breadcrumb-item" ><a href="" style="text-decoration:none; color:white">Expenses Summary</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Summary</li>
+      </ol>
+    </nav>
+  </div>
+  <div class="col-md-2">
+  <a href="{% url 'expenses'%}" class="btn btn-primary  rounded"><i class="bi bi-arrow-left-short"></i>&nbsp;Back</a>
+  </div>
+{% comment %} my  chart goes here {% endcomment %}
+
+<canvas id="myChart" width="60%">
+</canvas>
+</div>  
+</div>
+<script src="{% static 'js/stats.js' %}"></script> 
+{% endblock %}

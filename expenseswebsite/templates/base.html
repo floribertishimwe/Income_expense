@@ -1,0 +1,94 @@
+{% load static %}
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>TrulyExpenses {% block  title %}{% endblock  %} </title>
+    <!-- Bootstrap core CSS -->
+<link href= "{% static "css/bootstrap.min.css" %}" rel="stylesheet" >
+<link href= "{% static "css/main.css" %}" rel="stylesheet" >
+<link href= "{% static "css/toggler.css" %}" rel="stylesheet" >
+<script src="{%  static 'js/toggler.js' %}"></script>
+<script src="{%  static 'js/main.js' %}"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js" integrity="sha384-zNy6FEbO50N+Cg5wap8IKA4M/ZnLJgzc6w2NqACZaK0u0FXfOWRRJOnQtpZun8ha" crossorigin="anonymous"></script>
+
+{% comment %} Plugin link {% endcomment %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-datalabels/2.2.0/chartjs-plugin-datalabels.min.js" integrity="sha512-JPcRR8yFa8mmCsfrw4TNte1ZvF1e3+1SdGMslZvmrzDYxS69J7J49vkFL8u6u8PlPJK+H3voElBtUCzaXj+6ig==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+{% comment %} End of plugin link {% endcomment %}
+
+    <!-- Custom styles for this template -->
+    <link href="{% static 'css/dashboard.css' %}" rel="stylesheet">
+  </head>
+  <body>
+    
+<header class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">  
+  {% comment %} <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>  {% endcomment %}
+
+  <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3" href="#">TrulyExpenses</a>
+ 
+  <div class="navbar-nav" style="display:flex; flex-direction:row;align-items:center">
+
+<div class="nav-item text-nowrap me-5">
+
+<a  class="nav-link me-2 " href="">
+{{request.user.username}}
+<!-- ({{request.user.email}}) -->
+</a>
+</div>
+
+    <div class="nav-item text-nowrap mt-3 d-none d-md-flex">
+
+      <form action="{% url 'logout' %}" method="POST">
+        {% csrf_token %}
+        <input class="text text-capitalize me-3  " type="submit" value="Sign out">
+      </form> 
+      <!-- <a class="nav-link px-3" href="#">Sign out</a> -->
+       
+    </div> 
+
+    <div class="toggle_btn me-2 p-1">
+      <i class="fa-solid fa-bars"></i>
+    </div>
+    <div class="dropdown_menu fw-semibold ">
+        <li> <a href="#" class="nav-item">Dashboard</a> </li>
+        <li> <a href="{% url 'expenses'%}" class="nav-item">Expenses</a> </li>
+        <li> <a href="{% url 'income'%}" class="nav-item">Income</a> </li>
+        <li> <a href="{% url 'stats'%}"class="nav-item">Expense summary</a> </li>
+        <li> <a href="#"class="nav-item">Income summary</a> </li>
+        <li> <a href="{% url 'preferences' %}"class="nav-item">General settings</a> </li>
+        <li> <a href="#"class="nav-item">Account</a> </li>
+        <li> 
+          <form action="{% url 'logout' %}" method="POST">
+            {% csrf_token %}
+            <input class="text text-capitalize action_btn text-light fw-bold px-5" type="submit" value="sign out">
+          </form> 
+        </li>
+    </div>
+  </div>
+</header>
+
+<div class="container-fluid">
+  <div class="row">
+{% include 'partials/_sidebar.html' %}
+
+    <main  gyiimkrkin class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+      {% block content %}
+      
+      
+      {% endblock%}
+
+    </main>
+  </div>
+</div>
+    <script src="/docs/5.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/feather.min.js" integrity="sha384-uO3SXW5IuS1ZpFPKugNNWqTZRRglnUJK6UAZ/gxOX80nxEkN9NcGZTftn6RzhGWE" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js" integrity="sha384-zNy6FEbO50N+Cg5wap8IKA4M/ZnLJgzc6w2NqACZaK0u0FXfOWRRJOnQtpZun8ha" crossorigin="anonymous"></script>
+    <script src="dashboard.js"></script>
+    <script src="{%  static 'js/toggler.js' %}"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+    </body>
+</html>
